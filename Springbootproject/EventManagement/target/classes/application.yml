@@ -1,0 +1,73 @@
+
+eureka:
+
+  client:
+
+
+    service-url:
+
+      defaultZone: http://localhost:8761/eureka
+
+      
+
+spring:
+
+  application:
+
+    name: EventManagement
+    
+  kafka:
+
+    consumer:
+
+      bootstrap-servers: localhost:9092
+
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+server:
+
+  port: 8081
+  
+resilience4j.circuitbreaker:
+
+  configs:
+
+    default:
+
+      slidingWindowType: COUNT_BASED
+
+      slidingWindowSize: 100
+
+      permittedNumberOfCallsInHalfOpenState: 10
+
+      waitDurationInOpenState: 10
+
+      failureRateThreshold: 60
+
+      registerHealthIndicator: true
+
+      
+
+     
+
+management:
+
+  endpoints:
+
+    web:
+
+      exposure:
+
+        include:
+
+        - "*"
+
+    
+
+  endpoint:
+
+    health:
+
+      show-details: always      
