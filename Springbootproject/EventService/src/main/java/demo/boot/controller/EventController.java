@@ -77,12 +77,12 @@ public class EventController {
 	public ResponseEntity<Event> updateEvent(@PathVariable Long id, @Valid @RequestBody Event upEvent) {
 		Optional<Event> existingEventOptional = eventDAO.findEventById(id);
 
-		if (existingEventOptional.isEmpty()) {
+		if (!existingEventOptional.isEmpty()) {
 			Event event = existingEventOptional.get();
 			event.setEventName(upEvent.getEventName());
 			event.setSpeaker(upEvent.getSpeaker());
 
-			Event updated = eventDAO.createEvent(event);
+			Event updated = eventDAO.updateEvent(event);
 			return ResponseEntity.ok(updated);
 		} else {
 			return ResponseEntity.notFound().build();
